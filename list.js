@@ -25,7 +25,7 @@ var List = React.createClass({
   getInitialState: function() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {
-      dataSource: ds.cloneWithRows(['a', 'b', 'cc', 'exa']),
+      dataSource: ds.cloneWithRows(['a', 'b', 'cc', 'example', '1232', 'native']),
     };
   },
 
@@ -33,10 +33,10 @@ var List = React.createClass({
     var imgSource = THUMB_URLS[0];
     return (
     <View style={styles.container}>
-      <View style={styles.row}>
-        <Image style={styles.thumbnail} source={imgSource} />
+      <Image style={styles.thumbnail} source={imgSource} />
+      <View style={styles.rightContainer}>
         <Text style={styles.text}>
-          {rowData + ' - '}
+          {rowData}
         </Text>
       </View>
     </View>
@@ -57,15 +57,11 @@ var List = React.createClass({
 
     );
   }
-    
+
 });
 
 var styles = StyleSheet.create({
-  row: {
-    padding: 25,
-    borderWidth: 1,
-    borderColor: '#DDDDDD'
-  },
+
   text: {
     fontSize: 15,
     textAlign: 'center',
@@ -82,53 +78,20 @@ var styles = StyleSheet.create({
   thumbnail: {
     width: 80,
     height: 80,
-    marginRight: 10
+    marginRight: 5,
   },
 
   container: {
     flex: 1,
-    //flexDirection: 'row',
+    flexDirection: 'row',
     justifyContent: 'center',
-    //alignItems: 'center',
+    alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    padding: 5,
   },
-  title: {
-    fontSize: 18
-  },
-  description: {
-    fontSize: 14,
-    color: 'gray'
-  }
-  /*rightContainer: {
+  rightContainer: {
     flex: 1,
   },
-  title: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  year: {
-    textAlign: 'center',
-  },
-  thumbnail: {
-    width: 53,
-    height: 81,
-  },
-  listView: {
-    paddingTop: 20,
-    backgroundColor: '#F5FCFF',
-  },
-  description: {
-    marginBottom: 20,
-    fontSize: 18,
-    textAlign: 'center',
-    color: '#656565'
-  },
-  container: {
-    padding: 30,
-    marginTop: 65,
-    alignItems: 'center'
-  }*/
 });
 
 module.exports = List;

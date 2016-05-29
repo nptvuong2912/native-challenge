@@ -22,7 +22,7 @@
   }
 } */
 
-var search= require('./search')
+var list= require('./list')
 
 /*
 * render the first page of the app
@@ -35,8 +35,8 @@ class firstProject extends Component {
       <NavigatorIOS
         style={styles.container}
         initialRoute={{
-          title: 'House Finder',
-          component: search,
+          title: 'React-Native challenge',
+          component: list,
         }}/>
     );
   }
