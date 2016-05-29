@@ -7,6 +7,7 @@
 
  var React = require('react');
  var ReactNative = require('react-native');
+ var Item = require('./item');
  var {
    Image,
    ListView,
@@ -15,6 +16,7 @@
    RecyclerViewBackedScrollView,
    Text,
    View,
+   NavigatorIOS
  } = ReactNative;
 
  var THUMB_URLS = [
@@ -25,7 +27,7 @@ var List = React.createClass({
   getInitialState: function() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {
-      dataSource: ds.cloneWithRows(['a', 'b', 'cc', 'example', '1232', 'native' ,'live your life', 'Dont argue with dummies' ]),
+      dataSource: ds.cloneWithRows(['Do not mess with me', 'i am not hungry', 'not funny', 'example', 'Hehehee', 'native' ]),
     };
   },
 
@@ -35,7 +37,7 @@ var List = React.createClass({
     <View style={styles.container}>
       <Image style={styles.thumbnail} source={imgSource} />
       <View style={styles.rightContainer}>
-        <Text style={styles.text}>
+        <Text style={styles.text} onPress={() => this._rowPressed(rowData.guid)}>
           {rowData}
         </Text>
       </View>
@@ -47,6 +49,17 @@ var List = React.createClass({
     return (<View style={styles.sectionDivider}>
       <Text style={styles.headingText}>My list</Text>
       </View>);
+  },
+
+  //Show more details about the place when pressed
+  _rowPressed: function () {
+    var property = ['Do not mess with me', 'i am not hungry', 'not funny', 'example', 'Hehehee', 'native']
+
+    this.props.navigator.push({
+      title: "Detail",
+      component: Item,
+      passProps: {property: property}
+    });
   },
 
   render: function() {
