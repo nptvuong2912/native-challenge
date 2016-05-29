@@ -25,7 +25,7 @@ var List = React.createClass({
   getInitialState: function() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {
-      dataSource: ds.cloneWithRows(['a', 'b', 'cc', 'example', '1232', 'native']),
+      dataSource: ds.cloneWithRows(['a', 'b', 'cc', 'example', '1232', 'native' ,'live your life', 'Dont argue with dummies' ]),
     };
   },
 
