@@ -16,18 +16,31 @@
    RecyclerViewBackedScrollView,
    Text,
    View,
-   NavigatorIOS
+   NavigatorIOS,
+   ActionSheetIOS,
  } = ReactNative;
 
  var THUMB_URLS = [
    require('./Thumbnails/p1.jpg'),
  ];
 
+ var BUTTONS = [
+   'Details',
+   'Save',
+   'Share',
+   'Delete',
+   'Cancel'
+ ];
+ var DESTRUCTIVE_INDEX = 3;
+ var CANCEL_INDEX = 4;
+
 var List = React.createClass({
+
   getInitialState: function() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return {
       dataSource: ds.cloneWithRows(['Do not mess with me', 'i am not hungry', 'not funny', 'example', 'Hehehee', 'native' ]),
+      clicked: 'Options',
     };
   },
 
@@ -39,6 +52,9 @@ var List = React.createClass({
       <View style={styles.rightContainer}>
         <Text style={styles.text} onPress={() => this._rowPressed(rowData.guid)}>
           {rowData}
+        </Text>
+        <Text onPress={this.showActionSheet.bind(this)} style={styles.button}>
+          {this.state.clicked}
         </Text>
       </View>
     </View>
@@ -60,6 +76,22 @@ var List = React.createClass({
       component: Item,
       passProps: {property: property}
     });
+  },
+
+  showActionSheet: function() {
+
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        options: BUTTONS,
+        cancelButtonIndex: CANCEL_INDEX,
+        destructiveButtonIndex: DESTRUCTIVE_INDEX,
+        tintColor: 'blue',
+      },
+
+      (buttonIndex) => {
+        this.setState({ clicked: 'Clicked' });
+      }
+    );
   },
 
   render: function() {
@@ -105,6 +137,12 @@ var styles = StyleSheet.create({
   rightContainer: {
     flex: 1,
   },
+  button: {
+    marginTop: 20,
+    fontWeight: '500',
+    textAlign: 'center',
+    color: '#48BBEC',
+  }
 });
 
 module.exports = List;
