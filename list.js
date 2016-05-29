@@ -53,7 +53,7 @@ var List = React.createClass({
         <Text style={styles.text} onPress={() => this._rowPressed(rowData.guid)}>
           {rowData}
         </Text>
-        <Text onPress={this.showActionSheet.bind(this)} style={styles.button}>
+        <Text onPress={this.showActionSheet} style={styles.button}>
           {this.state.clicked}
         </Text>
       </View>
